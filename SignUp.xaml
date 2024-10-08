@@ -1,0 +1,19 @@
+﻿<Window x:Class="Travel_agency.SignUp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Travel_agency"
+        mc:Ignorable="d"
+        Title="SignUp" Height="500" Width="850">
+    <Grid>
+        <Canvas>
+            <Button x:Name="LogInButton" Content="Войти" Canvas.Left="635" Canvas.Top="10" FontSize="20" Height="60" Width="155" Click="LogInButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button x:Name="SignUpButton" Content="Зарегистрироваться" Canvas.Left="590" Canvas.Top="364" Height="60" Width="200" FontSize="20" Click="SignUpButton_Click" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox x:Name="NameBox" Canvas.Left="300" TextWrapping="Wrap" Text="Введите имя" Canvas.Top="140" Width="200" FontSize="20" Height="35" MouseEnter="NameBox_MouseEnter" MouseLeave="NameBox_MouseLeave" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="EmailBox" Canvas.Left="300" TextWrapping="Wrap" Text="Введите адрес эл. почты" Canvas.Top="190" Width="200" Height="35" FontSize="20" MouseEnter="EmailBox_MouseEnter" MouseLeave="EmailBox_MouseLeave" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="PasswordBox" Canvas.Left="300" TextWrapping="Wrap" Text="Введите пароль" Canvas.Top="240" Width="200" Height="35" FontSize="20" MouseEnter="PasswordBox_MouseEnter" MouseLeave="PasswordBox_MouseLeave" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Canvas>
+
+    </Grid>
+</Window>
