@@ -1,0 +1,22 @@
+﻿<Window x:Class="Travel_agency.AdminListUsers"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Travel_agency"
+        mc:Ignorable="d"
+        Title="AdminListUsers" Height="500" Width="850">
+    <Grid>
+        <Button x:Name="ExiteButton" Content="Закрыть" Margin="10,413,0,0" Click="ExiteButton_Click" HorizontalAlignment="Left" Width="126" Height="42" VerticalAlignment="Top"/>
+        <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Margin="70,28,0,0" HorizontalAlignment="Left" Width="616" Height="362" VerticalAlignment="Top">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="709,58,0,0" VerticalAlignment="Top" Height="34" Width="76"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="709,118,0,0" VerticalAlignment="Top" Height="39" Width="76"/>
+
+    </Grid>
+</Window>

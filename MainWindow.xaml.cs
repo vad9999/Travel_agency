@@ -39,7 +39,7 @@ namespace Travel_agency
                 }
                 if (!admin)
                 {
-                    UserRepository.AddUser(new User { Name = "admin", Email = "admin", Password = "admin", IsAdmin = true });
+                    UserRepository.AddUser(new User { Name = "admin", Email = "admin", Password = "admin", IsAdmin = true, Blocking = false });
                 }
             }
         }
@@ -55,7 +55,28 @@ namespace Travel_agency
                     {
                         if (UserRepository.GetUserByEmail(EmailBox.Text).Password == PasswordBox.Text)
                         {
-                            /*...*/
+                            if(EmailBox.Text == "admin" && PasswordBox.Text == "admin")
+                            {
+                                AdminTour adminTour = new AdminTour();
+                                adminTour.Show();
+                                this.Close();
+                            }
+                            else
+                            {
+                                if (!UserRepository.GetBlockUser(EmailBox.Text))
+                                {
+                                    UserTour userTour = new UserTour();
+                                    userTour.Show();
+                                    this.Close();
+                                }
+                                else
+                                {
+                                    if (MessageBox.Show("Вы заблокированы админимтратором!", "", MessageBoxButton.OK, MessageBoxImage.Warning) == MessageBoxResult.OK)
+                                    {
+                                        this.Close();
+                                    }
+                                }
+                            }
                         }
                         else
                         {

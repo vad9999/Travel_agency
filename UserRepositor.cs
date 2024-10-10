@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +21,10 @@ namespace Travel_agency
             return _context.Users.ToList();
         }
 
-        //public int GetUsersCount()
-        //{
-        //    return _context.Users.ToList().Count();
-        //}
+        public bool GetBlockUser(string email)
+        {
+            return _context.Users.SingleOrDefault(u => u.Email == email).Blocking;
+        }
 
         public User GetUserById(int id)
         {

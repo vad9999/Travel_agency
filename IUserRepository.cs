@@ -13,7 +13,7 @@ namespace Travel_agency
         void AddUser(User user);
         void UpdateUser(User user);
         void DeleteUser(int id);
+        bool GetBlockUser(string email);
         User GetUserByEmail(string email);
-        //int GetUsersCount();
     }
 }
