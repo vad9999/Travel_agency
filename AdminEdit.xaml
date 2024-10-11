@@ -1,0 +1,18 @@
+﻿<Window x:Class="Travel_agency.AdminEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Travel_agency"
+        mc:Ignorable="d"
+        Title="AdminEdit" Height="345" Width="674">
+    <Grid>
+        <TextBox x:Name="EditNameBox" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Введите имя" VerticalAlignment="Top" Width="143" Height="40"/>
+        <TextBox x:Name="EditCountryBox" HorizontalAlignment="Left" Margin="10,55,0,0" TextWrapping="Wrap" Text="Введите страну" VerticalAlignment="Top" Width="143" Height="42"/>
+        <TextBox x:Name="DiscriptionEditBox" HorizontalAlignment="Left" Margin="182,10,0,0" TextWrapping="Wrap" Text="Введите описание" VerticalAlignment="Top" Width="267" Height="134"/>
+        <TextBox x:Name="PriceEditBox" HorizontalAlignment="Left" Margin="476,10,0,0" TextWrapping="Wrap" Text="Введите цену" VerticalAlignment="Top" Width="188" Height="40"/>
+        <Button x:Name="EditImageButton" Content="Изменить фотографию" HorizontalAlignment="Left" Margin="10,277,0,0" VerticalAlignment="Top" Height="42" Width="152"/>
+        <Button x:Name="SaveButton" Content="Сохранить" HorizontalAlignment="Left" Margin="566,277,0,0" VerticalAlignment="Top" Height="42" Width="98"/>
+
+    </Grid>
+</Window>

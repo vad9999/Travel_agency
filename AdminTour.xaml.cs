@@ -34,5 +34,29 @@ namespace Travel_agency
             AdminListUsers adminListUsers = new AdminListUsers();
             adminListUsers.Show();
         }
+
+        private void AddTourButton_Click(object sender, RoutedEventArgs e)
+        {
+            AdminAddTour adminAddTour = new AdminAddTour();
+            adminAddTour.Show();
+        }
+
+        private void AddHotelButton_Click(object sender, RoutedEventArgs e)
+        {
+            AdminAddHotel adminAddHotel = new AdminAddHotel();
+            adminAddHotel.Show();
+        }
+
+        private void EditTourButton_Click(object sender, RoutedEventArgs e)
+        {
+            AdminEdit adminEdit = new AdminEdit();
+            adminEdit.Show();
+        }
+
+        private void ReservationListButton_Click(object sender, RoutedEventArgs e)
+        {
+            AdminReservationList adminReservationList = new AdminReservationList();
+            adminReservationList.Show();
+        }
     }
 }

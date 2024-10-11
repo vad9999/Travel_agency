@@ -18,7 +18,7 @@
         <Button x:Name="PreviousButtonn" Content="Предыдущая страница" HorizontalAlignment="Left" Margin="10,435,0,0" VerticalAlignment="Top" Height="40" Width="150"/>
         <Button x:Name="ReservarionButton" Content="Забронировать" HorizontalAlignment="Left" Margin="736,10,0,0" VerticalAlignment="Top" Height="35" Width="104"/>
         <Button x:Name="ExitButton" Content="Выход" HorizontalAlignment="Left" Margin="779,54,0,0" VerticalAlignment="Top" Height="24" Width="61" Click="ExitButton_Click"/>
-        <Button x:Name="ReservationButton" Content="Брони" HorizontalAlignment="Left" Margin="666,10,0,0" VerticalAlignment="Top" Height="35" Width="65"/>
+        <Button x:Name="ReservationButton" Content="Брони" HorizontalAlignment="Left" Margin="666,10,0,0" VerticalAlignment="Top" Height="35" Width="65" Click="ReservationButton_Click"/>
 
     </Grid>
 </Window>

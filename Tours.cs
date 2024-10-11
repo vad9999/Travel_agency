@@ -13,7 +13,7 @@ namespace Travel_agency
         public string Country { get; set; } = null!;
         public decimal Price { get; set; }
         public string Description { get; set; } = null!;
+        public string PathImage { get; set; } = null!;
         public List<Reservation> Reservations { get; set; } = null!;
-        public List<Hotels> Hotels { get; set; } = null!;
     }
 }

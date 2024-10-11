@@ -17,11 +17,11 @@
         <Button x:Name="PreviousButtonn" Content="Предыдущая страница" HorizontalAlignment="Left" Margin="10,435,0,0" VerticalAlignment="Top" Height="40" Width="150"/>
         <Button x:Name="NextButton" Content="Следующая страница" HorizontalAlignment="Left" Margin="690,435,0,0" VerticalAlignment="Top" Height="40" Width="150"/>
         <Button x:Name="ExitButton" Content="Выход" HorizontalAlignment="Left" Margin="779,54,0,0" VerticalAlignment="Top" Height="24" Width="61" Click="ExitButton_Click"/>
-        <Button x:Name="AddHotelButton" Content="Добавить отель" HorizontalAlignment="Left" Margin="731,10,0,0" VerticalAlignment="Top" Height="35" Width="109"/>
+        <Button x:Name="AddHotelButton" Content="Добавить отель" HorizontalAlignment="Left" Margin="731,10,0,0" VerticalAlignment="Top" Height="35" Width="109" Click="AddHotelButton_Click"/>
         <Button x:Name="DeleteTourButton" Content="Удалить" HorizontalAlignment="Left" Margin="551,10,0,0" VerticalAlignment="Top" Width="85" Height="35"/>
-        <Button x:Name="AddTourButton" Content="Добавить тур" HorizontalAlignment="Left" Margin="641,10,0,0" VerticalAlignment="Top" Width="85" Height="35"/>
-        <Button x:Name="EditTourButton" Content="Изменить" HorizontalAlignment="Left" Margin="471,10,0,0" VerticalAlignment="Top" Height="35" Width="75"/>
+        <Button x:Name="AddTourButton" Content="Добавить тур" HorizontalAlignment="Left" Margin="641,10,0,0" VerticalAlignment="Top" Width="85" Height="35" Click="AddTourButton_Click"/>
+        <Button x:Name="EditTourButton" Content="Изменить" HorizontalAlignment="Left" Margin="471,10,0,0" VerticalAlignment="Top" Height="35" Width="75" Click="EditTourButton_Click"/>
         <Button x:Name="AllUsersButton" Content="Список пользователей" HorizontalAlignment="Left" Margin="316,10,0,0" VerticalAlignment="Top" Height="35" Width="150" Click="AllUsersButton_Click"/>
-        <Button x:Name="ReservationListButton" Content="Список броней" HorizontalAlignment="Left" Margin="206,10,0,0" VerticalAlignment="Top" Height="35" Width="105"/>
+        <Button x:Name="ReservationListButton" Content="Список броней" HorizontalAlignment="Left" Margin="206,10,0,0" VerticalAlignment="Top" Height="35" Width="105" Click="ReservationListButton_Click"/>
     </Grid>
 </Window>

@@ -15,8 +15,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="709,58,0,0" VerticalAlignment="Top" Height="34" Width="76"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="709,118,0,0" VerticalAlignment="Top" Height="39" Width="76"/>
+        <Button x:Name="BlockingTrueButton" Content="Заблокировать" HorizontalAlignment="Left" Margin="716,28,0,0" VerticalAlignment="Top" Height="45" Width="110"/>
+        <Button x:Name="BlockingFalseButton" Content="Разблокировать" HorizontalAlignment="Left" Margin="716,85,0,0" VerticalAlignment="Top" Height="45" Width="110"/>
 
     </Grid>
 </Window>

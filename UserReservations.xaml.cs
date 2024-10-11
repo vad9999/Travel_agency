@@ -15,13 +15,18 @@ using System.Windows.Shapes;
 namespace Travel_agency
 {
     /// <summary>
-    /// Логика взаимодействия для UserReservation.xaml
+    /// Логика взаимодействия для UserReservations.xaml
     /// </summary>
-    public partial class UserReservation : Window
+    public partial class UserReservations : Window
     {
-        public UserReservation()
+        public UserReservations()
         {
             InitializeComponent();
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

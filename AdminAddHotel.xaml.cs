@@ -15,27 +15,18 @@ using System.Windows.Shapes;
 namespace Travel_agency
 {
     /// <summary>
-    /// Логика взаимодействия для UserTour.xaml
+    /// Логика взаимодействия для AdminAddHotel.xaml
     /// </summary>
-    public partial class UserTour : Window
+    public partial class AdminAddHotel : Window
     {
-        int _currentPage = 0;
-        int _pageSize = 8;
-
-        public UserTour()
+        public AdminAddHotel()
         {
             InitializeComponent();
         }
 
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void ReservationButton_Click(object sender, RoutedEventArgs e)
-        {
-            UserReservations userReservations = new UserReservations();
-            userReservations.Show();
         }
     }
 }
