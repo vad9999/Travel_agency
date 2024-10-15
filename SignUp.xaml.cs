@@ -84,10 +84,18 @@ namespace Travel_agency
                             }
                             if (!email)
                             {
-                                UserRepository.AddUser(new User { Name = NameBox.Text, Email = EmailBox.Text, Password = PasswordBox.Text, IsAdmin = false, Blocking = false });
-                                NameBox.Text = "Введите имя";
-                                EmailBox.Text = "Введите адрес эл. почты";
-                                PasswordBox.Text = "Введите пароль";
+                                if(DataProcessingCheck.IsChecked == true)
+                                {
+                                    UserRepository.AddUser(new User { Name = NameBox.Text, Email = EmailBox.Text, Password = PasswordBox.Text, IsAdmin = false, Blocking = false, isLogin = false });
+                                    NameBox.Text = "Введите имя";
+                                    EmailBox.Text = "Введите адрес эл. почты";
+                                    PasswordBox.Text = "Введите пароль";
+                                    DataProcessingCheck.IsChecked = false;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Дайте согласие на обработку персональных данных!");
+                                }
                             }
                         }
                     }

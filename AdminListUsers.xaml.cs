@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,11 +25,57 @@ namespace Travel_agency
         public AdminListUsers()
         {
             InitializeComponent();
+            LoadUsers();
+        }
+
+        private void LoadUsers()
+        {
+            using (var context = new AppDbContext())
+            {
+                IUserRepository UserRepository = new UserRepository(context);
+                UserListView.ItemsSource = UserRepository.GetAllUsers(); 
+            }
         }
 
         private void ExiteButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void BlockingTrueButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserListView.SelectedItem != null)
+            {
+                User selectedUser = (User)UserListView.SelectedItem;
+                if(selectedUser.Id != 1) 
+                {
+                    using (var context = new AppDbContext())
+                    {
+                        IUserRepository UserRepository = new UserRepository(context);
+                        selectedUser.Blocking = true;
+                        UserRepository.UpdateUser(selectedUser);
+                    }
+                }
+            }
+            LoadUsers();
+        }
+
+        private void BlockingFalseButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserListView.SelectedItem != null)
+            {
+                User selectedUser = (User)UserListView.SelectedItem;
+                if (selectedUser.Id != 1)
+                {
+                    using (var context = new AppDbContext())
+                    {
+                        IUserRepository UserRepository = new UserRepository(context);
+                        selectedUser.Blocking = false;
+                        UserRepository.UpdateUser(selectedUser);
+                    }
+                }
+            }
+            LoadUsers();
         }
     }
 }

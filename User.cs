@@ -14,6 +14,7 @@ namespace Travel_agency
         public string Password { get; set; } = null!;
         public bool IsAdmin { get; set; }
         public bool Blocking { get; set; }
+        public bool isLogin {  get; set; }
         public List<Reservation> Reservations { get; set; } = null!;   
     }
 }

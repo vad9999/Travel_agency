@@ -8,15 +8,17 @@
         Title="AdminListUsers" Height="500" Width="850">
     <Grid>
         <Button x:Name="ExiteButton" Content="Закрыть" Margin="10,413,0,0" Click="ExiteButton_Click" HorizontalAlignment="Left" Width="126" Height="42" VerticalAlignment="Top"/>
-        <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Margin="70,28,0,0" HorizontalAlignment="Left" Width="616" Height="362" VerticalAlignment="Top">
+        <ListView x:Name="UserListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="70,28,0,0" HorizontalAlignment="Left" Width="616" Height="362" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" Width="200"/>
+                    <GridViewColumn Header="Blocking" DisplayMemberBinding="{Binding Blocking}" Width="50"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="BlockingTrueButton" Content="Заблокировать" HorizontalAlignment="Left" Margin="716,28,0,0" VerticalAlignment="Top" Height="45" Width="110"/>
-        <Button x:Name="BlockingFalseButton" Content="Разблокировать" HorizontalAlignment="Left" Margin="716,85,0,0" VerticalAlignment="Top" Height="45" Width="110"/>
-
+        <Button x:Name="BlockingTrueButton" Content="Заблокировать" HorizontalAlignment="Left" Margin="716,28,0,0" VerticalAlignment="Top" Height="45" Width="110" Click="BlockingTrueButton_Click"/>
+        <Button x:Name="BlockingFalseButton" Content="Разблокировать" HorizontalAlignment="Left" Margin="716,85,0,0" VerticalAlignment="Top" Height="45" Width="110" Click="BlockingFalseButton_Click"/>
     </Grid>
 </Window>

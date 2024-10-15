@@ -39,7 +39,7 @@ namespace Travel_agency
                 }
                 if (!admin)
                 {
-                    UserRepository.AddUser(new User { Name = "admin", Email = "admin", Password = "admin", IsAdmin = true, Blocking = false });
+                    UserRepository.AddUser(new User { Name = "admin", Email = "admin", Password = "admin", IsAdmin = true, Blocking = false, isLogin = false });
                 }
             }
         }
@@ -65,6 +65,7 @@ namespace Travel_agency
                             {
                                 if (!UserRepository.GetBlockUser(EmailBox.Text))
                                 {
+                                    UserRepository.GetUserByEmail(EmailBox.Text).isLogin = true;
                                     UserTour userTour = new UserTour();
                                     userTour.Show();
                                     this.Close();
