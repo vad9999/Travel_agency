@@ -21,6 +21,8 @@ namespace Travel_agency
     public partial class AdminAddHotel : Window
     {
         string imagePath = null!;
+        public event EventHandler ItemAdded;
+
         public AdminAddHotel()
         {
             InitializeComponent();
@@ -54,6 +56,8 @@ namespace Travel_agency
                 }
 
                 HotelRepository.AddHotel(new Hotels { Name = hotelName, Description = hotelDescription, Country = hotelCountry, Price = decimal.Parse(hotelPrice), PathImage = imagePath });
+
+                ItemAdded?.Invoke(this, EventArgs.Empty);
 
                 this.Close();
             }
@@ -97,14 +101,14 @@ namespace Travel_agency
 
         private void PriceHotelBox_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (PriceHotelBox.Text == "Введите описание отеля")
+            if (PriceHotelBox.Text == "Введите цену отеля")
                 PriceHotelBox.Text = "";
         }
 
         private void PriceHotelBox_MouseLeave(object sender, MouseEventArgs e)
         {
             if (PriceHotelBox.Text == "")
-                PriceHotelBox.Text = "Введите описание отеля";
+                PriceHotelBox.Text = "Введите цену отеля";
         }
 
         private void AddImageButton_Click(object sender, RoutedEventArgs e)

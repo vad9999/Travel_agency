@@ -7,10 +7,20 @@
         mc:Ignorable="d"
         Title="AdminTour" Height="500" Width="850">
     <Grid>
-        <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Margin="76,63,98,61">
+        <ListView x:Name="TourHotelListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="76,62,0,0" Height="360" VerticalAlignment="Top" HorizontalAlignment="Left" Width="676">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Image" Width="110">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding PathImage}" Width="100" Height="100" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Country" Width="100" DisplayMemberBinding="{Binding Country}" />
+                    <GridViewColumn Header="Price" Width="100" DisplayMemberBinding="{Binding Price}" />
+                    <GridViewColumn Header="Description" Width="220" DisplayMemberBinding="{Binding Description}"/>
                 </GridView>
             </ListView.View>
         </ListView>

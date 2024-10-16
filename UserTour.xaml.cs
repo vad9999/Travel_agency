@@ -25,6 +25,25 @@ namespace Travel_agency
         public UserTour()
         {
             InitializeComponent();
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            using (var context = new AppDbContext())
+            {
+                // Получаем данные о турах и отелях
+                List<Tours> tours = context.Tours.ToList();
+                List<Hotels> hotels = context.Hotels.ToList();
+
+                // Объединяем списки для отображения в ListView
+                var combinedData = new List<object>();
+                combinedData.AddRange(tours);
+                combinedData.AddRange(hotels);
+
+                // Устанавливаем источником данных для ListView
+                TourHotelListView.ItemsSource = combinedData;
+            }
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)

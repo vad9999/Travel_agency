@@ -21,6 +21,8 @@ namespace Travel_agency
     public partial class AdminAddTour : Window
     {
         string imagePath = null!;
+        public event EventHandler ItemAdded;
+
         public AdminAddTour()
         {
             InitializeComponent();
@@ -110,6 +112,8 @@ namespace Travel_agency
                 }
 
                 TourRepository.AddTour(new Tours { Name = tourName, Description = tourDescription, Country = tourCountry, Price = decimal.Parse(tourPrice), PathImage = imagePath });
+
+                ItemAdded?.Invoke(this, EventArgs.Empty);
 
                 this.Close();
             }
