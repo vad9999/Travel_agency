@@ -55,7 +55,7 @@ namespace Travel_agency
                     return;
                 }
 
-                HotelRepository.AddHotel(new Hotels { Name = hotelName, Description = hotelDescription, Country = hotelCountry, Price = decimal.Parse(hotelPrice), PathImage = imagePath });
+                HotelRepository.AddHotel(new Hotels { Name = hotelName, Description = hotelDescription, Country = hotelCountry, Price = decimal.Parse(hotelPrice), PathImage = imagePath, IsArchive = false });
 
                 ItemAdded?.Invoke(this, EventArgs.Empty);
 

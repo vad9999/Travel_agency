@@ -111,7 +111,7 @@ namespace Travel_agency
                     return;
                 }
 
-                TourRepository.AddTour(new Tours { Name = tourName, Description = tourDescription, Country = tourCountry, Price = decimal.Parse(tourPrice), PathImage = imagePath });
+                TourRepository.AddTour(new Tours { Name = tourName, Description = tourDescription, Country = tourCountry, Price = decimal.Parse(tourPrice), PathImage = imagePath, IsArchive = false });
 
                 ItemAdded?.Invoke(this, EventArgs.Empty);
 

@@ -19,31 +19,55 @@ namespace Travel_agency
     /// </summary>
     public partial class UserTour : Window
     {
-        int _currentPage = 0;
-        int _pageSize = 8;
+        private int _currentPage = 1; 
+        private const int _itemsPerPage = 6;
 
         public UserTour()
         {
             InitializeComponent();
-            LoadData();
+            UpdateListView();
+            IsOnePage();
+            PreviousButtonn.IsEnabled = false;
         }
 
-        private void LoadData()
+        private void IsOnePage()
+        {
+            if (GetTotalPages() == 1)
+            {
+                PreviousButtonn.IsEnabled = false;
+                NextButton.IsEnabled = false;
+            }
+            else
+            {
+                NextButton.IsEnabled = true;
+            }
+        }
+
+        private List<object> GetListToursHotels()
         {
             using (var context = new AppDbContext())
             {
-                // Получаем данные о турах и отелях
-                List<Tours> tours = context.Tours.ToList();
-                List<Hotels> hotels = context.Hotels.ToList();
+                ITourRepository TourRepository = new TourRepository(context);
+                IHotelRepository HotelRepository = new HotelRepository(context);
 
-                // Объединяем списки для отображения в ListView
                 var combinedData = new List<object>();
-                combinedData.AddRange(tours);
-                combinedData.AddRange(hotels);
 
-                // Устанавливаем источником данных для ListView
-                TourHotelListView.ItemsSource = combinedData;
+                combinedData.AddRange(TourRepository.GetAllToursNonArchive());
+                combinedData.AddRange(HotelRepository.GetAllHotelsNonArchive());
+
+                return combinedData;
             }
+        }
+
+        private void UpdateListView()
+        {
+            var itemsToShow = GetListToursHotels().Skip((_currentPage - 1) * _itemsPerPage).Take(_itemsPerPage).ToList();
+            TourHotelListView.ItemsSource = itemsToShow;
+        }
+
+        private int GetTotalPages()
+        {
+            return (int)Math.Ceiling((double)GetListToursHotels().Count / _itemsPerPage);
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -55,6 +79,34 @@ namespace Travel_agency
         {
             UserReservations userReservations = new UserReservations();
             userReservations.Show();
+        }
+
+        private void PreviousButtonn_Click(object sender, RoutedEventArgs e)
+        {
+            NextButton.IsEnabled = true;
+            if (_currentPage > 1)
+            {
+                _currentPage--;
+                UpdateListView();
+            }
+            if(_currentPage == 1)
+            {
+                PreviousButtonn.IsEnabled = false;
+            }
+        }
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            PreviousButtonn.IsEnabled = true;
+            if (_currentPage < GetTotalPages())
+            {
+                _currentPage++;
+                UpdateListView();
+            }
+            if (_currentPage == GetTotalPages())
+            {
+                NextButton.IsEnabled = false;
+            }
         }
     }
 }

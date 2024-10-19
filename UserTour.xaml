@@ -6,8 +6,17 @@
         xmlns:local="clr-namespace:Travel_agency"
         mc:Ignorable="d"
         Title="UserTour" Height="500" Width="850">
-    <Grid>
-        <ListView x:Name="TourHotelListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="75,50,119,58" Height="360" VerticalAlignment="Top" HorizontalAlignment="Left" Width="676">
+    <Grid Width="849">
+        <Grid.RowDefinitions>
+             <RowDefinition Height="*"/>
+             <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="NextButton" Content="Следующая страница" HorizontalAlignment="Left" Margin="690,435,0,0" VerticalAlignment="Top" Height="40" Width="150" Click="NextButton_Click"/>
+        <Button x:Name="PreviousButtonn" Content="Предыдущая страница" HorizontalAlignment="Left" Margin="10,435,0,0" VerticalAlignment="Top" Height="40" Width="150" Click="PreviousButtonn_Click"/>
+        <Button x:Name="ReservarionButton" Content="Забронировать" HorizontalAlignment="Left" Margin="736,10,0,0" VerticalAlignment="Top" Height="35" Width="104"/>
+        <Button x:Name="ExitButton" Content="Выход" HorizontalAlignment="Left" Margin="779,54,0,0" VerticalAlignment="Top" Height="24" Width="61" Click="ExitButton_Click"/>
+        <Button x:Name="ReservationButton" Content="Брони" HorizontalAlignment="Left" Margin="666,10,0,0" VerticalAlignment="Top" Height="35" Width="65" Click="ReservationButton_Click"/>
+        <ListView x:Name="TourHotelListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="50,66,0,0" Height="360" VerticalAlignment="Top" HorizontalAlignment="Left" Width="676">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Image" Width="110">
@@ -20,15 +29,9 @@
                     <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn Header="Country" Width="100" DisplayMemberBinding="{Binding Country}" />
                     <GridViewColumn Header="Price" Width="100" DisplayMemberBinding="{Binding Price}" />
-                    <GridViewColumn Header="Description" Width="220" DisplayMemberBinding="{Binding Description}"/>
+                    <GridViewColumn Header="Description" Width="220" DisplayMemberBinding="{Binding Description}" />
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="NextButton" Content="Следующая страница" HorizontalAlignment="Left" Margin="690,435,0,0" VerticalAlignment="Top" Height="40" Width="150"/>
-        <Button x:Name="PreviousButtonn" Content="Предыдущая страница" HorizontalAlignment="Left" Margin="10,435,0,0" VerticalAlignment="Top" Height="40" Width="150"/>
-        <Button x:Name="ReservarionButton" Content="Забронировать" HorizontalAlignment="Left" Margin="736,10,0,0" VerticalAlignment="Top" Height="35" Width="104"/>
-        <Button x:Name="ExitButton" Content="Выход" HorizontalAlignment="Left" Margin="779,54,0,0" VerticalAlignment="Top" Height="24" Width="61" Click="ExitButton_Click"/>
-        <Button x:Name="ReservationButton" Content="Брони" HorizontalAlignment="Left" Margin="666,10,0,0" VerticalAlignment="Top" Height="35" Width="65" Click="ReservationButton_Click"/>
-
     </Grid>
 </Window>
