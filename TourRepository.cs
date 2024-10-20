@@ -40,13 +40,16 @@ namespace Travel_agency
         {
             List<Tours> tours = GetAllTours();
             List<Tours> nonarchive = new List<Tours>();
-            for(int i = 1; i <= tours[tours.Count - 1].Id; i++)
+            if(tours.Count > 0)
             {
-                if(GetTourById(i) != null)
+                for (int i = 1; i <= tours[tours.Count - 1].Id; i++)
                 {
-                    if (GetTourById(i).IsArchive == false)
+                    if (GetTourById(i) != null)
                     {
-                        nonarchive.Add(GetTourById(i));
+                        if (GetTourById(i).IsArchive == false)
+                        {
+                            nonarchive.Add(GetTourById(i));
+                        }
                     }
                 }
             }
@@ -56,13 +59,16 @@ namespace Travel_agency
         {
             List<Tours> tours = GetAllTours();
             List<Tours> archive = new List<Tours>();
-            for (int i = 1; i <= tours[tours.Count - 1].Id; i++)
+            if (tours.Count > 0)
             {
-                if (GetTourById(i) != null)
+                for (int i = 1; i <= tours[tours.Count - 1].Id; i++)
                 {
-                    if (GetTourById(i).IsArchive == true)
+                    if (GetTourById(i) != null)
                     {
-                        archive.Add(GetTourById(i));
+                        if (GetTourById(i).IsArchive == true)
+                        {
+                            archive.Add(GetTourById(i));
+                        }
                     }
                 }
             }

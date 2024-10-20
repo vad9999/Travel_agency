@@ -7,11 +7,13 @@
         mc:Ignorable="d"
         Title="UserReservations" Height="500" Width="850">
     <Grid>
-        <Button x:Name="ExitButton" Content="Закрыть" HorizontalAlignment="Left" Margin="30,440,0,0" VerticalAlignment="Top" Height="34" Width="68" Click="ExitButton_Click"/>
-        <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Margin="60,15,110,65">
+        <ListView x:Name="ReservationListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="60,15,110,65">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="TourOrHotelId" Width="100" DisplayMemberBinding="{Binding TourOrHotelId}" />
+                    <GridViewColumn Header="TourOrHotel" Width="100" DisplayMemberBinding="{Binding TourOrHotel}" />
+                    <GridViewColumn Header="IsConfirm" Width="100" DisplayMemberBinding="{Binding IsConfirm}" />
                 </GridView>
             </ListView.View>
         </ListView>

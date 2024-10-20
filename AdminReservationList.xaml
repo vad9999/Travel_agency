@@ -7,9 +7,18 @@
         mc:Ignorable="d"
         Title="AdminReservationList" Height="450" Width="800">
     <Grid>
-        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,153,54"/>
-        <Button x:Name="ExitButton" Content="Закрыть" HorizontalAlignment="Left" Margin="10,385,0,0" VerticalAlignment="Top" Height="39" Width="83"/>
-        <Button x:Name="ReservationTrueButton" Content="Подтвердить" HorizontalAlignment="Left" Margin="665,10,0,0" VerticalAlignment="Top" Height="49" Width="125"/>
+        <Button x:Name="ReservationTrueButton" Content="Подтвердить" HorizontalAlignment="Left" Margin="665,10,0,0" VerticalAlignment="Top" Height="49" Width="125" Click="ReservationTrueButton_Click"/>
+        <ListView x:Name="ReservationsListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="27,22,0,0" HorizontalAlignment="Left" Width="611" Height="360" VerticalAlignment="Top">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="UserEmail" Width="100" DisplayMemberBinding="{Binding UserEmail}" />
+                    <GridViewColumn Header="TourOrHotelId" Width="100" DisplayMemberBinding="{Binding TourOrHotelId}" />
+                    <GridViewColumn Header="TourOrHotel" Width="100" DisplayMemberBinding="{Binding TourOrHotel}" />
+                    <GridViewColumn Header="IsConfirm" Width="100" DisplayMemberBinding="{Binding IsConfirm}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
 
     </Grid>
 </Window>

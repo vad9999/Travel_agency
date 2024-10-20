@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Travel_agency"
         mc:Ignorable="d"
-        Title="UserTour" Height="500" Width="850">
+        Title="UserTour" Height="500" Width="850" Closed="Window_Closed">
     <Grid Width="849">
         <Grid.RowDefinitions>
              <RowDefinition Height="*"/>
@@ -13,9 +13,8 @@
         </Grid.RowDefinitions>
         <Button x:Name="NextButton" Content="Следующая страница" HorizontalAlignment="Left" Margin="690,435,0,0" VerticalAlignment="Top" Height="40" Width="150" Click="NextButton_Click"/>
         <Button x:Name="PreviousButtonn" Content="Предыдущая страница" HorizontalAlignment="Left" Margin="10,435,0,0" VerticalAlignment="Top" Height="40" Width="150" Click="PreviousButtonn_Click"/>
-        <Button x:Name="ReservarionButton" Content="Забронировать" HorizontalAlignment="Left" Margin="736,10,0,0" VerticalAlignment="Top" Height="35" Width="104"/>
-        <Button x:Name="ExitButton" Content="Выход" HorizontalAlignment="Left" Margin="779,54,0,0" VerticalAlignment="Top" Height="24" Width="61" Click="ExitButton_Click"/>
-        <Button x:Name="ReservationButton" Content="Брони" HorizontalAlignment="Left" Margin="666,10,0,0" VerticalAlignment="Top" Height="35" Width="65" Click="ReservationButton_Click"/>
+        <Button x:Name="ReservarionButton" Content="Забронировать" HorizontalAlignment="Left" Margin="736,10,0,0" VerticalAlignment="Top" Height="35" Width="104" Click="ReservarionButton_Click"/>
+        <Button x:Name="ReservationListButton" Content="Брони" HorizontalAlignment="Left" Margin="666,10,0,0" VerticalAlignment="Top" Height="35" Width="65" Click="ReservationListButton_Click"/>
         <ListView x:Name="TourHotelListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="50,66,0,0" Height="360" VerticalAlignment="Top" HorizontalAlignment="Left" Width="676">
             <ListView.View>
                 <GridView>

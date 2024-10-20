@@ -9,8 +9,9 @@ namespace Travel_agency
     public class Reservation
     {
         public int Id { get; set; }
-        public User User { get; set; } = null!;
-        public Tours Tours { get; set; } = null!;
-        public Hotels Hotels { get; set; } = null!;
+        public string UserEmail { get; set; } = null!;
+        public int TourOrHotelId { get; set; }
+        public string TourOrHotel { get; set; } = null!;
+        public bool IsConfirm { get; set; }
     }
 }

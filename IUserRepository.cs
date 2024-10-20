@@ -15,5 +15,6 @@ namespace Travel_agency
         void DeleteUser(int id);
         bool GetBlockUser(string email);
         User GetUserByEmail(string email);
+        User UserAutentification();
     }
 }

@@ -73,16 +73,6 @@ namespace Travel_agency
             return (int)Math.Ceiling((double)GetListToursHotels().Count / _itemsPerPage);
         }
 
-        private void LoadData()
-        {
-            TourHotelListView.ItemsSource = GetListToursHotels();
-        }
-
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         private void AllUsersButton_Click(object sender, RoutedEventArgs e)
         {
             AdminListUsers adminListUsers = new AdminListUsers();
@@ -105,8 +95,13 @@ namespace Travel_agency
 
         private void EditTourButton_Click(object sender, RoutedEventArgs e)
         {
-            AdminEdit adminEdit = new AdminEdit();
-            adminEdit.Show();
+            if (TourHotelListView.SelectedItem != null)
+            {
+                object selectedItem = TourHotelListView.SelectedItem;
+                AdminEdit adminEdit = new AdminEdit(selectedItem);
+                adminEdit.ItemAdded += AddWindow_ItemAdded;
+                adminEdit.ShowDialog();
+            }    
         }
 
         private void ReservationListButton_Click(object sender, RoutedEventArgs e)
@@ -157,7 +152,6 @@ namespace Travel_agency
 
         private void ArchiveWindow_ItemNonArchive(object sender, EventArgs e)
         {
-            LoadData();
             UpdateListView();
             IsOnePage();
         }

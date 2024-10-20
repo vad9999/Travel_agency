@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Diagnostics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,11 +23,19 @@ namespace Travel_agency
         public UserReservations()
         {
             InitializeComponent();
+            LoadData();
         }
 
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        private void LoadData()
         {
-            this.Close();
+            using(var context = new AppDbContext())
+            {
+                IReservationRepository ReservationRepository = new ReservationRepository(context);
+                IUserRepository UserRepository = new UserRepository(context);
+                string userEmail = UserRepository.UserAutentification().Email; 
+                List<Reservation> reservations = ReservationRepository.UserReservation(userEmail);
+                ReservationListView.ItemsSource = reservations;
+            }
         }
     }
 }

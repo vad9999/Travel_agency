@@ -11,8 +11,8 @@
         <TextBox x:Name="EditCountryBox" HorizontalAlignment="Left" Margin="10,55,0,0" TextWrapping="Wrap" Text="Введите страну" VerticalAlignment="Top" Width="143" Height="42"/>
         <TextBox x:Name="DiscriptionEditBox" HorizontalAlignment="Left" Margin="182,10,0,0" TextWrapping="Wrap" Text="Введите описание" VerticalAlignment="Top" Width="267" Height="134"/>
         <TextBox x:Name="PriceEditBox" HorizontalAlignment="Left" Margin="476,10,0,0" TextWrapping="Wrap" Text="Введите цену" VerticalAlignment="Top" Width="188" Height="40"/>
-        <Button x:Name="EditImageButton" Content="Изменить фотографию" HorizontalAlignment="Left" Margin="10,277,0,0" VerticalAlignment="Top" Height="42" Width="152"/>
-        <Button x:Name="SaveButton" Content="Сохранить" HorizontalAlignment="Left" Margin="566,277,0,0" VerticalAlignment="Top" Height="42" Width="98"/>
+        <Button x:Name="EditImageButton" Content="Изменить фотографию" HorizontalAlignment="Left" Margin="10,277,0,0" VerticalAlignment="Top" Height="42" Width="152" Click="EditImageButton_Click"/>
+        <Button x:Name="SaveButton" Content="Сохранить" HorizontalAlignment="Left" Margin="566,277,0,0" VerticalAlignment="Top" Height="42" Width="98" Click="SaveButton_Click"/>
 
     </Grid>
 </Window>

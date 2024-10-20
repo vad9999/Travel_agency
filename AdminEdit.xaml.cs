@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace Travel_agency
 {
@@ -19,9 +20,98 @@ namespace Travel_agency
     /// </summary>
     public partial class AdminEdit : Window
     {
-        public AdminEdit()
+        public event EventHandler ItemAdded;
+        private bool IsTour;
+        string imagePath;
+        public Tours TourToEdit { get; set; }
+        public Hotels HotelToEdit { get; set; }
+
+        public AdminEdit(object obj)
         {
             InitializeComponent();
+            if(obj is Tours)
+            {
+                IsTour = true;
+                TourToEdit = (Tours)obj;
+                EditNameBox.Text = TourToEdit.Name;
+                EditCountryBox.Text = TourToEdit.Country;
+                DiscriptionEditBox.Text = TourToEdit.Description;
+                PriceEditBox.Text = TourToEdit.Price.ToString();
+                imagePath = TourToEdit.PathImage;
+            }
+            else
+            {
+                IsTour = false;
+                HotelToEdit = (Hotels)obj;
+                EditNameBox.Text = HotelToEdit.Name;
+                EditCountryBox.Text = HotelToEdit.Country;
+                DiscriptionEditBox.Text = HotelToEdit.Description;
+                PriceEditBox.Text = HotelToEdit.Price.ToString();
+                imagePath = HotelToEdit.PathImage;
+            }   
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            string Name = EditNameBox.Text;
+            string Description = DiscriptionEditBox.Text;
+            string Country = EditCountryBox.Text;
+            string Price = PriceEditBox.Text;
+
+            if (string.IsNullOrEmpty(Name) ||
+               string.IsNullOrEmpty(Description) ||
+               string.IsNullOrEmpty(Country) ||
+               string.IsNullOrEmpty(Price) ||
+               string.IsNullOrEmpty(imagePath))
+            {
+                MessageBox.Show("Please fill in all fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Validate product count
+            if (!decimal.TryParse(Price, out decimal price))
+            {
+                MessageBox.Show("Product count must be a valid number.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (IsTour)
+            {
+                TourToEdit.Name = Name;
+                TourToEdit.Description = Description;
+                TourToEdit.Country = Country;
+                TourToEdit.Price = decimal.Parse(Price);
+                TourToEdit.PathImage = imagePath;
+                using (var context = new AppDbContext())
+                {
+                    ITourRepository TourRepository = new TourRepository(context);
+                    TourRepository.UpdateTour(TourToEdit);
+                }
+                ItemAdded?.Invoke(this, EventArgs.Empty);
+                DialogResult = true;
+            }
+            else
+            {
+                HotelToEdit.Name = Name;
+                HotelToEdit.Description = Description;
+                HotelToEdit.Country = Country;
+                HotelToEdit.Price = decimal.Parse(Price);
+                HotelToEdit.PathImage = imagePath;
+                using (var context = new AppDbContext())
+                {
+                    IHotelRepository HotelRepository = new HotelRepository(context);
+                    HotelRepository.UpdateHotel(HotelToEdit);
+                }
+                ItemAdded?.Invoke(this, EventArgs.Empty);
+                DialogResult = true;
+            }
+        }
+
+        private void EditImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files (*.jpg, *.jpeg, *.png, *.gif)|*.jpg;*.jpeg;*.png;*.gif|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+                imagePath = openFileDialog.FileName;
         }
     }
 }

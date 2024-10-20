@@ -26,7 +26,6 @@
         </ListView>
         <Button x:Name="PreviousButtonn" Content="Предыдущая страница" HorizontalAlignment="Left" Margin="10,435,0,0" VerticalAlignment="Top" Height="40" Width="150" Click="PreviousButtonn_Click"/>
         <Button x:Name="NextButton" Content="Следующая страница" HorizontalAlignment="Left" Margin="690,435,0,0" VerticalAlignment="Top" Height="40" Width="150" Click="NextButton_Click"/>
-        <Button x:Name="ExitButton" Content="Выход" HorizontalAlignment="Left" Margin="779,54,0,0" VerticalAlignment="Top" Height="24" Width="61" Click="ExitButton_Click"/>
         <Button x:Name="AddHotelButton" Content="Добавить отель" HorizontalAlignment="Left" Margin="731,10,0,0" VerticalAlignment="Top" Height="35" Width="109" Click="AddHotelButton_Click"/>
         <Button x:Name="DeleteTourButton" Content="Удалить" HorizontalAlignment="Left" Margin="551,10,0,0" VerticalAlignment="Top" Width="85" Height="35" Click="DeleteTourButton_Click"/>
         <Button x:Name="AddTourButton" Content="Добавить тур" HorizontalAlignment="Left" Margin="641,10,0,0" VerticalAlignment="Top" Width="85" Height="35" Click="AddTourButton_Click"/>

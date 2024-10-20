@@ -70,15 +70,10 @@ namespace Travel_agency
             return (int)Math.Ceiling((double)GetListToursHotels().Count / _itemsPerPage);
         }
 
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void ReservationButton_Click(object sender, RoutedEventArgs e)
+        private void ReservationListButton_Click(object sender, RoutedEventArgs e)
         {
             UserReservations userReservations = new UserReservations();
-            userReservations.Show();
+            userReservations.ShowDialog();
         }
 
         private void PreviousButtonn_Click(object sender, RoutedEventArgs e)
@@ -106,6 +101,54 @@ namespace Travel_agency
             if (_currentPage == GetTotalPages())
             {
                 NextButton.IsEnabled = false;
+            }
+        }
+
+        private void ReservarionButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (TourHotelListView != null)
+            {
+                var selectedItem = TourHotelListView.SelectedItem;
+                if (selectedItem is Tours)
+                {
+                    using(var context = new AppDbContext())
+                    {
+                        string strTour = "Tour";
+                        Tours tour = (Tours)selectedItem;
+
+                        IReservationRepository ReservationRepository = new ReservationRepository(context);
+                        IUserRepository UserRepository = new UserRepository(context);
+                        string user = UserRepository.UserAutentification().Email;
+                        ReservationRepository.AddReservarion(new Reservation { UserEmail = user, TourOrHotelId = tour.Id, TourOrHotel = strTour, IsConfirm = false});
+                        MessageBox.Show("Тур забронирован!");
+                    }
+                }
+                else
+                {
+                    using (var context = new AppDbContext())
+                    {
+                        string strHotel = "Hotel";
+                        Hotels hotel = (Hotels)selectedItem;
+
+                        IReservationRepository ReservationRepository = new ReservationRepository(context);
+                        IUserRepository UserRepository = new UserRepository(context);
+                        string user = UserRepository.UserAutentification().Email;
+                        ReservationRepository.AddReservarion(new Reservation { UserEmail = user, TourOrHotelId = hotel.Id, TourOrHotel = strHotel, IsConfirm = false });
+                        MessageBox.Show("Отель забронирован!");
+                    }
+                }
+            }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            using (var context = new AppDbContext())
+            {
+                IUserRepository userRepository = new UserRepository(context);
+
+                User user = userRepository.UserAutentification();
+                user.isLogin = false;
+                userRepository.UpdateUser(user);
             }
         }
     }

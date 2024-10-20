@@ -39,13 +39,16 @@ namespace Travel_agency
         {
             List<Hotels> hotel = GetAllHotels();
             List<Hotels> nonarchive = new List<Hotels>();
-            for (int i = 1; i <= hotel[hotel.Count - 1].Id; i++)
+            if(hotel.Count > 0)
             {
-                if (GetHotelById(i) != null)
+                for (int i = 1; i <= hotel[hotel.Count - 1].Id; i++)
                 {
-                    if (GetHotelById(i).IsArchive == false)
+                    if (GetHotelById(i) != null)
                     {
-                        nonarchive.Add(GetHotelById(i));
+                        if (GetHotelById(i).IsArchive == false)
+                        {
+                            nonarchive.Add(GetHotelById(i));
+                        }
                     }
                 }
             }
@@ -55,15 +58,18 @@ namespace Travel_agency
         {
             List<Hotels> hotel = GetAllHotels();
             List<Hotels> archive = new List<Hotels>();
-            for (int i = 1; i <= hotel[hotel.Count - 1].Id; i++)
+            if(hotel.Count > 0)
             {
-                if (GetHotelById(i) != null)
+                for (int i = 1; i <= hotel[hotel.Count - 1].Id; i++)
                 {
-                    if (GetHotelById(i).IsArchive == true)
+                    if (GetHotelById(i) != null)
                     {
-                        archive.Add(GetHotelById(i));
+                        if (GetHotelById(i).IsArchive == true)
+                        {
+                            archive.Add(GetHotelById(i));
+                        }
                     }
-                } 
+                }
             }
             return archive;
         }

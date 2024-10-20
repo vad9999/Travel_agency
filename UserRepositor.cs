@@ -57,5 +57,15 @@ namespace Travel_agency
                 _context.SaveChanges();
             }
         }
+        public User UserAutentification()
+        {
+            List<User> users = GetAllUsers();
+            for(int i = 1; i <= users.Count; i++) 
+            {
+                if(GetUserById(i).isLogin == true)
+                    return GetUserById(i);
+            }
+            return null;
+        }
     }
 }

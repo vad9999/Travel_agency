@@ -66,6 +66,7 @@ namespace Travel_agency
                                 if (!UserRepository.GetBlockUser(EmailBox.Text))
                                 {
                                     UserRepository.GetUserByEmail(EmailBox.Text).isLogin = true;
+                                    UserRepository.UpdateUser(UserRepository.GetUserByEmail(EmailBox.Text));
                                     UserTour userTour = new UserTour();
                                     userTour.Show();
                                     this.Close();
