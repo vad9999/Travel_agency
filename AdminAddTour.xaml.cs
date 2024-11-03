@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,54 +29,6 @@ namespace Travel_agency
             InitializeComponent();
         }
 
-        private void NameTourBox_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (NameTourBox.Text == "Введите название тура")
-                NameTourBox.Text = "";
-        }
-
-        private void NameTourBox_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (NameTourBox.Text == "")
-                NameTourBox.Text = "Введите название тура";
-        }
-
-        private void CountryTourBox_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (CountryTourBox.Text == "Введите страну тура")
-                CountryTourBox.Text = "";
-        }
-
-        private void CountryTourBox_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (CountryTourBox.Text == "")
-                CountryTourBox.Text = "Введите страну тура";
-        }
-
-        private void DescriptionTourBox_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (DescriptionTourBox.Text == "Введите описание тура")
-                DescriptionTourBox.Text = "";
-        }
-
-        private void DescriptionTourBox_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (DescriptionTourBox.Text == "")
-                DescriptionTourBox.Text = "Введите описание тура";
-        }
-
-        private void PriceTourBox_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (PriceTourBox.Text == "Введите цену тура")
-                PriceTourBox.Text = "";
-        }
-
-        private void PriceTourBox_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (PriceTourBox.Text == "")
-                PriceTourBox.Text = "Введите цену тура";
-        }
-
         private void ImageButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -86,37 +39,82 @@ namespace Travel_agency
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            using (var context = new AppDbContext())
+            ITourRepository TourRepository = new TourRepository(new AppDbContext());
+
+            string tourName = NameTourBox.Text;
+            string tourDescription = DescriptionTourBox.Text;
+            string tourPrice = PriceTourBox.Text;
+            string tourCountry = CountryTourBox.Text;
+
+            if (string.IsNullOrEmpty(tourName) ||
+                string.IsNullOrEmpty(tourDescription) ||
+                string.IsNullOrEmpty(tourPrice) ||
+                string.IsNullOrEmpty(tourCountry) ||
+                string.IsNullOrEmpty(imagePath))
             {
-                ITourRepository TourRepository = new TourRepository(context);
-
-                string tourName = NameTourBox.Text;
-                string tourDescription = DescriptionTourBox.Text;
-                string tourPrice = PriceTourBox.Text;
-                string tourCountry = CountryTourBox.Text;
-
-                if (string.IsNullOrEmpty(tourName) ||
-                    string.IsNullOrEmpty(tourDescription) ||
-                    string.IsNullOrEmpty(tourPrice) ||
-                    string.IsNullOrEmpty(tourCountry) ||
-                    string.IsNullOrEmpty(imagePath))
-                {
-                    MessageBox.Show("Пожалуйста заполните все поля и добавьте фотографию", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
-                if (!decimal.TryParse(tourPrice, out decimal price))
-                {
-                    MessageBox.Show("Цена должна быть цислом", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
-                TourRepository.AddTour(new Tours { Name = tourName, Description = tourDescription, Country = tourCountry, Price = decimal.Parse(tourPrice), PathImage = imagePath, IsArchive = false });
-
-                ItemAdded?.Invoke(this, EventArgs.Empty);
-
-                this.Close();
+                MessageBox.Show("Пожалуйста заполните все поля и добавьте фотографию", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
+
+            if (!decimal.TryParse(tourPrice, out decimal price))
+            {
+                MessageBox.Show("Цена должна быть цислом", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            TourRepository.AddTour(new Tours { Name = tourName, Description = tourDescription, Country = tourCountry, Price = decimal.Parse(tourPrice), ImageData = File.ReadAllBytes(imagePath), IsArchive = false });
+
+            ItemAdded?.Invoke(this, EventArgs.Empty);
+
+            this.Close();
+        }
+
+        private void NameTourBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (NameTourBox.Text == "Введите название тура")
+                NameTourBox.Text = "";
+        }
+
+        private void NameTourBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (NameTourBox.Text == "")
+                NameTourBox.Text = "Введите название тура";
+        }
+
+        private void CountryTourBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (CountryTourBox.Text == "Введите страну тура")
+                CountryTourBox.Text = "";
+        }
+
+        private void CountryTourBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (CountryTourBox.Text == "")
+                CountryTourBox.Text = "Введите страну тура";
+        }
+
+        private void DescriptionTourBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (DescriptionTourBox.Text == "Введите описание тура")
+                DescriptionTourBox.Text = "";
+        }
+
+        private void DescriptionTourBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (DescriptionTourBox.Text == "")
+                DescriptionTourBox.Text = "Введите описание тура";
+        }
+
+        private void PriceTourBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (PriceTourBox.Text == "Введите цену тура")
+                PriceTourBox.Text = "";
+        }
+
+        private void PriceTourBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (PriceTourBox.Text == "")
+                PriceTourBox.Text = "Введите цену тура";
         }
     }
 }

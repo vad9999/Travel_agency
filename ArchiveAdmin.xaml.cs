@@ -28,53 +28,45 @@ namespace Travel_agency
 
         private void LoadData()
         {
-            using (var context = new AppDbContext())
-            {
-                ITourRepository TourRepository = new TourRepository(context);
-                IHotelRepository HotelRepository = new HotelRepository(context);
+            ITourRepository TourRepository = new TourRepository(new AppDbContext());
+            IHotelRepository HotelRepository = new HotelRepository(new AppDbContext());
 
-                var combinedData = new List<object>();
+            var combinedData = new List<object>();
 
-                combinedData.AddRange(TourRepository.GetAllToursArchive());
-                combinedData.AddRange(HotelRepository.GetAllHotelsArchive());
+            combinedData.AddRange(TourRepository.GetAllToursArchive());
+            combinedData.AddRange(HotelRepository.GetAllHotelsArchive());
 
-                ArchiveListView.ItemsSource = combinedData;
-            }
-        }
-
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            ItemNonArchive?.Invoke(this, EventArgs.Empty);
-            this.Close();
+            ArchiveListView.ItemsSource = combinedData;
         }
 
         private void UnZipButton_Click(object sender, RoutedEventArgs e)
         {
-            if(ArchiveListView.SelectedItem != null)
+            IHotelRepository HotelRepository = new HotelRepository(new AppDbContext());
+            ITourRepository TourRepository = new TourRepository(new AppDbContext());
+
+            if (ArchiveListView.SelectedItem != null)
             {
                 if (ArchiveListView.SelectedItem is Tours)
                 {
-                    using (var context = new AppDbContext())
-                    {
-                        ITourRepository TourRepository = new TourRepository(context);
-                        Tours selectedTour = (Tours)ArchiveListView.SelectedItem;
-                        selectedTour.IsArchive = false;
-                        TourRepository.UpdateTour(selectedTour);
-                    }   
+                    Tours selectedTour = (Tours)ArchiveListView.SelectedItem;
+                    selectedTour.IsArchive = false;
+                    TourRepository.UpdateTour(selectedTour);  
                 }
                 if (ArchiveListView.SelectedItem is Hotels)
                 {
-                    using (var context = new AppDbContext())
-                    {
-                        IHotelRepository HotelRepository = new HotelRepository(context);
-                        Hotels selectedHotel = (Hotels)ArchiveListView.SelectedItem;
-                        selectedHotel.IsArchive = false;
-                        HotelRepository.UpdateHotel(selectedHotel);
-                    } 
+                    Hotels selectedHotel = (Hotels)ArchiveListView.SelectedItem;
+                    selectedHotel.IsArchive = false;
+                    HotelRepository.UpdateHotel(selectedHotel);
                 }
                 LoadData();
                 ItemNonArchive?.Invoke(this, EventArgs.Empty);
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            ItemNonArchive?.Invoke(this, EventArgs.Empty);
+            this.Close();
         }
     }
 }

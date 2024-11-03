@@ -48,18 +48,15 @@ namespace Travel_agency
 
         private List<object> GetListToursHotels()
         {
-            using (var context = new AppDbContext())
-            {
-                ITourRepository TourRepository = new TourRepository(context);
-                IHotelRepository HotelRepository = new HotelRepository(context);
+            ITourRepository TourRepository = new TourRepository(new AppDbContext());
+            IHotelRepository HotelRepository = new HotelRepository(new AppDbContext());
 
-                var combinedData = new List<object>();
+            var combinedData = new List<object>();
 
-                combinedData.AddRange(TourRepository.GetAllToursNonArchive());
-                combinedData.AddRange(HotelRepository.GetAllHotelsNonArchive());
+            combinedData.AddRange(TourRepository.GetAllToursNonArchive());
+            combinedData.AddRange(HotelRepository.GetAllHotelsNonArchive());
 
-                return combinedData;
-            }
+            return combinedData;
         }
 
         private void UpdateListView()
@@ -118,25 +115,19 @@ namespace Travel_agency
 
         private void DeleteTourButton_Click(object sender, RoutedEventArgs e)
         {
+            ITourRepository TourRepository = new TourRepository(new AppDbContext());
+            IHotelRepository HotelRepository = new HotelRepository(new AppDbContext());
             if (TourHotelListView.SelectedItem != null)
             {
                 if(TourHotelListView.SelectedItem is Tours)
                 {
                     Tours selectedTour = (Tours)TourHotelListView.SelectedItem;
-                    using (var context = new AppDbContext())
-                    {
-                        ITourRepository TourRepository = new TourRepository(context);
-                        TourRepository.DeleteTour(selectedTour.Id);
-                    }
+                    TourRepository.DeleteTour(selectedTour.Id);
                 }
                 if(TourHotelListView.SelectedItem is Hotels)
                 {
                     Hotels selectedHotel = (Hotels)TourHotelListView.SelectedItem;
-                    using (var context = new AppDbContext())
-                    {
-                        IHotelRepository HotelRepository = new HotelRepository(context);
-                        HotelRepository.DeleteHotel(selectedHotel.Id);
-                    }
+                    HotelRepository.DeleteHotel(selectedHotel.Id);
                 }
                 UpdateListView();
                 IsOnePage();
@@ -158,27 +149,21 @@ namespace Travel_agency
 
         private void ZipButton_Click(object sender, RoutedEventArgs e)
         {
+            ITourRepository TourRepository = new TourRepository(new AppDbContext());
+            IHotelRepository HotelRepository = new HotelRepository(new AppDbContext());
             if (TourHotelListView.SelectedItem != null)
             {
                 if (TourHotelListView.SelectedItem is Tours)
                 {
-                    using (var context = new AppDbContext())
-                    {
-                        ITourRepository TourRepository = new TourRepository(context);
-                        Tours selectedTour = (Tours)TourHotelListView.SelectedItem;
-                        selectedTour.IsArchive = true;
-                        TourRepository.UpdateTour(selectedTour);
-                    }
+                    Tours selectedTour = (Tours)TourHotelListView.SelectedItem;
+                    selectedTour.IsArchive = true;
+                    TourRepository.UpdateTour(selectedTour);
                 }
                 if (TourHotelListView.SelectedItem is Hotels)
                 {
-                    using (var context = new AppDbContext())
-                    {
-                        IHotelRepository HotelRepository = new HotelRepository(context);
-                        Hotels selectedHotel = (Hotels)TourHotelListView.SelectedItem;
-                        selectedHotel.IsArchive = true;
-                        HotelRepository.UpdateHotel(selectedHotel);
-                    }      
+                    Hotels selectedHotel = (Hotels)TourHotelListView.SelectedItem;
+                    selectedHotel.IsArchive = true;
+                    HotelRepository.UpdateHotel(selectedHotel);     
                 }
                 if (GetListToursHotels().Count == 6)
                     _currentPage = 1;

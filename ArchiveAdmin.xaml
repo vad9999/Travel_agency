@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Travel_agency"
         mc:Ignorable="d"
-        Title="ArchiveAdmin" Height="450" Width="1000">
+        Title="ArchiveAdmin" Height="450" Width="1000" Closed="Window_Closed">
     <Grid>
         <ListView x:Name="ArchiveListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="69,10,0,0" Height="366" VerticalAlignment="Top" HorizontalAlignment="Left" Width="822">
             <ListView.View>
@@ -24,7 +24,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="ExitButton" Content="Закрыть" HorizontalAlignment="Left" Margin="47,387,0,0" VerticalAlignment="Top" Height="37" Width="91" Click="ExitButton_Click"/>
         <Button x:Name="UnZipButton" Content="Разархивировать" HorizontalAlignment="Left" Margin="761,396,0,0" VerticalAlignment="Top" Click="UnZipButton_Click"/>
 
     </Grid>

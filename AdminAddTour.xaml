@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="AdminAddTour" Height="345" Width="674">
     <Grid>
-        <TextBox x:Name="NameTourBox" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Введите название тура" VerticalAlignment="Top" Width="148" Height="39" MouseEnter="NameTourBox_MouseEnter" MouseLeave="NameTourBox_MouseLeave"/>
-        <TextBox x:Name="DescriptionTourBox" HorizontalAlignment="Left" Margin="190,7,0,0" TextWrapping="Wrap" Text="Введите описание тура" VerticalAlignment="Top" Width="299" Height="157" MouseEnter="DescriptionTourBox_MouseEnter" MouseLeave="DescriptionTourBox_MouseLeave"/>
-        <TextBox x:Name="PriceTourBox" HorizontalAlignment="Left" Margin="524,10,0,0" TextWrapping="Wrap" Text="Введите цену тура" VerticalAlignment="Top" Width="140" Height="44" MouseEnter="PriceTourBox_MouseEnter" MouseLeave="PriceTourBox_MouseLeave"/>
+        <TextBox x:Name="NameTourBox" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Введите название тура" VerticalAlignment="Top" Width="148" Height="39" GotFocus="NameTourBox_GotFocus" LostFocus="NameTourBox_LostFocus"/>
+        <TextBox x:Name="DescriptionTourBox" HorizontalAlignment="Left" Margin="190,7,0,0" TextWrapping="Wrap" Text="Введите описание тура" VerticalAlignment="Top" Width="299" Height="157" GotFocus="DescriptionTourBox_GotFocus" LostFocus="DescriptionTourBox_LostFocus"/>
+        <TextBox x:Name="PriceTourBox" HorizontalAlignment="Left" Margin="524,10,0,0" TextWrapping="Wrap" Text="Введите цену тура" VerticalAlignment="Top" Width="140" Height="44" GotFocus="PriceTourBox_GotFocus" LostFocus="PriceTourBox_LostFocus"/>
         <Button x:Name="ImageButton" Content="Добавить фотографию" HorizontalAlignment="Left" Margin="10,276,0,0" VerticalAlignment="Top" Height="43" Width="148" Click="ImageButton_Click"/>
         <Button x:Name="SaveButton" Content="Сохранить" HorizontalAlignment="Left" Margin="549,276,0,0" VerticalAlignment="Top" Height="43" Width="115" Click="SaveButton_Click"/>
-        <TextBox x:Name="CountryTourBox" HorizontalAlignment="Left" Margin="10,54,0,0" TextWrapping="Wrap" Text="Введите страну тура" VerticalAlignment="Top" Width="148" Height="39" MouseEnter="CountryTourBox_MouseEnter" MouseLeave="CountryTourBox_MouseLeave"/>
+        <TextBox x:Name="CountryTourBox" HorizontalAlignment="Left" Margin="10,54,0,0" TextWrapping="Wrap" Text="Введите страну тура" VerticalAlignment="Top" Width="148" Height="39" GotFocus="CountryTourBox_GotFocus" LostFocus="CountryTourBox_LostFocus"/>
 
     </Grid>
 </Window>

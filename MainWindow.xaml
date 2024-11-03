@@ -7,8 +7,8 @@
         Title="MainWindow" Height="500" Width="850" Loaded="MainWindow_Loaded">
     <Grid x:Name="Grid1">
         <Canvas>
-            <TextBox x:Name="EmailBox" Canvas.Left="300" TextWrapping="Wrap" Text="Введите эл. почту" Canvas.Top="126" Width="200" Height="35" FontSize="20" MouseEnter="EmailBox_MouseEnter" MouseLeave="EmailBox_MouseLeave" MaxLength="20" MaxLines="1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBox x:Name="PasswordBox" Canvas.Left="300" TextWrapping="Wrap" Text="Введите пароль" Canvas.Top="178" Width="200" Height="35" FontSize="20" MouseEnter="PasswordBox_MouseEnter" MouseLeave="PasswordBox_MouseLeave" MaxLength="13" MaxLines="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox x:Name="EmailBox" Canvas.Left="300" TextWrapping="Wrap" Text="Введите эл. почту" Canvas.Top="126" Width="200" Height="35" FontSize="20" MaxLength="20" MaxLines="1" HorizontalAlignment="Left" VerticalAlignment="Top" GotFocus="EmailBox_GotFocus" LostFocus="EmailBox_LostFocus"/>
+            <TextBox x:Name="PasswordBox" Canvas.Left="300" TextWrapping="Wrap" Text="Введите пароль" Canvas.Top="178" Width="200" Height="35" FontSize="20" MaxLength="13" MaxLines="1" HorizontalAlignment="Center" VerticalAlignment="Top" LostFocus="PasswordBox_LostFocus" GotFocus="PasswordBox_GotFocus"/>
             <Button x:Name="SignUpButton" Content="Регистрация" Canvas.Left="635" Canvas.Top="10" Canvas.Right="20" Height="60" Width="155" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Click="SignUpButton_Click"/>
             <Button x:Name="LogInButton" Content="Войти" Canvas.Left="635" Canvas.Top="364" Canvas.Right="20" Height="60" Width="155" FontSize="20" Click="LogInButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </Canvas>

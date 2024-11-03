@@ -24,67 +24,31 @@ namespace Travel_agency
             InitializeComponent();
         }
 
-        private void NameBox_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (NameBox.Text == "Введите имя")
-                NameBox.Text = "";
-        }
-
-        private void NameBox_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (NameBox.Text == "")
-                NameBox.Text = "Введите имя";
-        }
-
-        private void EmailBox_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (EmailBox.Text == "Введите адрес эл. почты")
-                EmailBox.Text = "";
-        }
-
-        private void EmailBox_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (EmailBox.Text == "")
-                EmailBox.Text = "Введите адрес эл. почты";
-        }
-
-        private void PasswordBox_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (PasswordBox.Text == "Введите пароль")
-                PasswordBox.Text = "";
-        }
-
-        private void PasswordBox_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (PasswordBox.Text == "")
-                PasswordBox.Text = "Введите пароль";
-        }
-
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
-            using (var context = new AppDbContext())
+            IUserRepository UserRepository = new UserRepository(new AppDbContext());
+            if (NameBox.Text != "Введите имя" && NameBox.Text != "")
             {
-                IUserRepository UserRepository = new UserRepository(context);
-                if (NameBox.Text != "Введите имя" && NameBox.Text != "")
+                if (EmailBox.Text != "Введите адрес эл. почты" && EmailBox.Text != "")
                 {
-                    if (EmailBox.Text != "Введите адрес эл. почты" && EmailBox.Text != "")
+                    if (PasswordBox.Text != "Введите пароль" && PasswordBox.Text != "")
                     {
-                        if (PasswordBox.Text != "Введите пароль" && PasswordBox.Text != "")
+                        bool email = false;
+                        var users = UserRepository.GetAllUsers().ToList();
+                        for (int i = 0; i < users.Count; i++)
                         {
-                            bool email = false;
-                            var users = UserRepository.GetAllUsers().ToList();
-                            for (int i = 0; i < users.Count; i++)
+                            if (users[i].Email == EmailBox.Text)
                             {
-                                if (users[i].Email == EmailBox.Text)
-                                {
-                                    email = true;
-                                    MessageBox.Show("Пользователь с такой почтой уже зарегистрирован");
-                                    break;
-                                }
+                                email = true;
+                                MessageBox.Show("Пользователь с такой почтой уже зарегистрирован");
+                                break;
                             }
-                            if (!email)
+                        }
+                        if (!email)
+                        {
+                            if(DataProcessingCheck.IsChecked == true)
                             {
-                                if(DataProcessingCheck.IsChecked == true)
+                                if(EmailBox.Text.Contains('@'))
                                 {
                                     UserRepository.AddUser(new User { Name = NameBox.Text, Email = EmailBox.Text, Password = PasswordBox.Text, IsAdmin = false, Blocking = false, isLogin = false });
                                     NameBox.Text = "Введите имя";
@@ -94,13 +58,18 @@ namespace Travel_agency
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Дайте согласие на обработку персональных данных!");
+                                    MessageBox.Show("Эл. почта должна содержать @");
                                 }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Дайте согласие на обработку персональных данных!");
                             }
                         }
                     }
                 }
             }
+            
         }
 
         private void LogInButton_Click(object sender, RoutedEventArgs e)
@@ -108,6 +77,42 @@ namespace Travel_agency
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
+        }
+
+        private void NameBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (NameBox.Text == "Введите имя")
+                NameBox.Text = "";
+        }
+
+        private void NameBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (NameBox.Text == "")
+                NameBox.Text = "Введите имя";
+        }
+
+        private void EmailBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (EmailBox.Text == "Введите адрес эл. почты")
+                EmailBox.Text = "";
+        }
+
+        private void EmailBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (EmailBox.Text == "")
+                EmailBox.Text = "Введите адрес эл. почты";
+        }
+
+        private void PasswordBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (PasswordBox.Text == "Введите пароль")
+                PasswordBox.Text = "";
+        }
+
+        private void PasswordBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (PasswordBox.Text == "")
+                PasswordBox.Text = "Введите пароль";
         }
     }
 }

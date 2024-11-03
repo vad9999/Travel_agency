@@ -28,14 +28,12 @@ namespace Travel_agency
 
         private void LoadData()
         {
-            using(var context = new AppDbContext())
-            {
-                IReservationRepository ReservationRepository = new ReservationRepository(context);
-                IUserRepository UserRepository = new UserRepository(context);
-                string userEmail = UserRepository.UserAutentification().Email; 
-                List<Reservation> reservations = ReservationRepository.UserReservation(userEmail);
-                ReservationListView.ItemsSource = reservations;
-            }
+            IReservationRepository ReservationRepository = new ReservationRepository(new AppDbContext());
+            IUserRepository UserRepository = new UserRepository(new AppDbContext());
+
+            string userEmail = UserRepository.UserAutentification().Email; 
+            List<Reservation> reservations = ReservationRepository.UserReservation(userEmail);
+            ReservationListView.ItemsSource = reservations;
         }
     }
 }

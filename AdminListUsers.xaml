@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="AdminListUsers" Height="500" Width="850">
     <Grid>
-        <Button x:Name="ExiteButton" Content="Закрыть" Margin="10,413,0,0" Click="ExiteButton_Click" HorizontalAlignment="Left" Width="126" Height="42" VerticalAlignment="Top"/>
         <ListView x:Name="UserListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="70,28,0,0" HorizontalAlignment="Left" Width="616" Height="362" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>

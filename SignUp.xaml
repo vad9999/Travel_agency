@@ -10,11 +10,11 @@
         <Canvas>
             <Button x:Name="LogInButton" Content="Войти" Canvas.Left="635" Canvas.Top="10" FontSize="20" Height="60" Width="155" Click="LogInButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Button x:Name="SignUpButton" Content="Зарегистрироваться" Canvas.Left="590" Canvas.Top="364" Height="60" Width="200" FontSize="20" Click="SignUpButton_Click" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <TextBox x:Name="NameBox" Canvas.Left="300" TextWrapping="Wrap" Text="Введите имя" Canvas.Top="140" Width="200" FontSize="20" Height="35" MouseEnter="NameBox_MouseEnter" MouseLeave="NameBox_MouseLeave" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox x:Name="EmailBox" Canvas.Left="300" TextWrapping="Wrap" Text="Введите адрес эл. почты" Canvas.Top="190" Width="200" Height="35" FontSize="20" MouseEnter="EmailBox_MouseEnter" MouseLeave="EmailBox_MouseLeave" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox x:Name="PasswordBox" Canvas.Left="300" TextWrapping="Wrap" Text="Введите пароль" Canvas.Top="240" Width="200" Height="35" FontSize="20" MouseEnter="PasswordBox_MouseEnter" MouseLeave="PasswordBox_MouseLeave" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <CheckBox x:Name="DataProcessingCheck" Content="" Canvas.Left="494" Canvas.Top="329" Height="20" Width="23" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.522,0.352"/>
-            <Label x:Name="dataProcessingLabel" Content="Согласен(а) на обработку персональных данных" Canvas.Left="128" Canvas.Top="319" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox x:Name="NameBox" Canvas.Left="300" TextWrapping="Wrap" Text="Введите имя" Canvas.Top="140" Width="234" FontSize="20" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" GotFocus="NameBox_GotFocus" LostFocus="NameBox_LostFocus"/>
+            <TextBox x:Name="EmailBox" Canvas.Left="300" TextWrapping="Wrap" Text="Введите адрес эл. почты" Canvas.Top="190" Width="234" Height="35" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" GotFocus="EmailBox_GotFocus" LostFocus="EmailBox_LostFocus"/>
+            <TextBox x:Name="PasswordBox" Canvas.Left="300" TextWrapping="Wrap" Text="Введите пароль" Canvas.Top="240" Width="234" Height="35" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" GotFocus="PasswordBox_GotFocus" LostFocus="PasswordBox_LostFocus"/>
+            <CheckBox x:Name="DataProcessingCheck" Content="" Canvas.Left="521" Canvas.Top="325" Height="20" Width="23" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.522,0.352"/>
+            <Label x:Name="dataProcessingLabel" Content="Согласен(а) на обработку персональных данных" Canvas.Left="150" Canvas.Top="315" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         </Canvas>
 
     </Grid>

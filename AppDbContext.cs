@@ -16,7 +16,7 @@ namespace Travel_agency
         public AppDbContext() => Database.EnsureCreated();
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source = E:\\C#3\\Travel_agency\\myDb.db");
+            optionsBuilder.UseSqlite("Data Source = myDb.db");
         }
     }
 }

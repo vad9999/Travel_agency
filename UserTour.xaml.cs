@@ -45,18 +45,15 @@ namespace Travel_agency
 
         private List<object> GetListToursHotels()
         {
-            using (var context = new AppDbContext())
-            {
-                ITourRepository TourRepository = new TourRepository(context);
-                IHotelRepository HotelRepository = new HotelRepository(context);
+            IHotelRepository HotelRepository = new HotelRepository(new AppDbContext());
+            ITourRepository TourRepository = new TourRepository(new AppDbContext());
 
-                var combinedData = new List<object>();
+            var combinedData = new List<object>();
 
-                combinedData.AddRange(TourRepository.GetAllToursNonArchive());
-                combinedData.AddRange(HotelRepository.GetAllHotelsNonArchive());
+            combinedData.AddRange(TourRepository.GetAllToursNonArchive());
+            combinedData.AddRange(HotelRepository.GetAllHotelsNonArchive());
 
-                return combinedData;
-            }
+            return combinedData;
         }
 
         private void UpdateListView()
@@ -106,67 +103,71 @@ namespace Travel_agency
 
         private void ReservarionButton_Click(object sender, RoutedEventArgs e)
         {
+            if (TourHotelListView.SelectedItem != null)
+            {
+                UserCard userCard = new UserCard();
+                userCard.Card += CardWindow;
+                userCard.ShowDialog();
+            }
+        }
+
+        private void CardWindow(object sender, EventArgs e)
+        {
+            IReservationRepository ReservationRepository = new ReservationRepository(new AppDbContext());
+            IUserRepository UserRepository = new UserRepository(new AppDbContext());
+
             if (TourHotelListView != null)
             {
                 var selectedItem = TourHotelListView.SelectedItem;
 
                 if (selectedItem is Tours)
                 {
-                    using (var context = new AppDbContext())
+                    
+                    Tours tour = (Tours)selectedItem;
+                    string user = UserRepository.UserAutentification().Email;
+                    var reservations = ReservationRepository.UserReservation(user);
+                    string strTour = "Tour";
+                    bool IsReservated = false;
+                    for (int i = 0; i < reservations.Count; i++)
                     {
-                        IReservationRepository ReservationRepository = new ReservationRepository(context);
-                        IUserRepository UserRepository = new UserRepository(context);
-                        Tours tour = (Tours)selectedItem;
-                        string user = UserRepository.UserAutentification().Email;
-                        var reservations = ReservationRepository.UserReservation(user);
-                        string strTour = "Tour";
-                        bool IsReservated = false;
-                        for (int i = 0; i < reservations.Count; i++)
+                        if (reservations[i].TourOrHotelId == tour.Id && reservations[i].TourOrHotel == strTour)
                         {
-                            if (reservations[i].TourOrHotelId == tour.Id && reservations[i].TourOrHotel == strTour)
-                            {
-                                IsReservated = true;
-                            }
+                            IsReservated = true;
                         }
-                        if(IsReservated)
-                        {
-                            MessageBox.Show("Вы уже забронировали этот тур");
-                        }
-                        else
-                        {
-                            ReservationRepository.AddReservarion(new Reservation { UserEmail = user, TourOrHotelId = tour.Id, TourOrHotel = strTour, IsConfirm = false });
-                            MessageBox.Show("Тур забронирован!");
-                        }
+                    }
+                    if (IsReservated)
+                    {
+                        MessageBox.Show("Вы уже забронировали этот тур");
+                    }
+                    else
+                    {
+                        ReservationRepository.AddReservarion(new Reservation { UserEmail = user, TourOrHotelId = tour.Id, TourOrHotel = strTour, IsConfirm = false });
+                        MessageBox.Show("Тур забронирован!");
                     }
                 }
                 else
                 {
-                    using (var context = new AppDbContext())
-                    {
-                        IReservationRepository ReservationRepository = new ReservationRepository(context);
-                        IUserRepository UserRepository = new UserRepository(context);
-                        string user = UserRepository.UserAutentification().Email;
-                        var reservations = ReservationRepository.UserReservation(user);
-                        string strHotel = "Hotel";
-                        Hotels hotel = (Hotels)selectedItem;
-                        bool IsReservated = false;
+                    string user = UserRepository.UserAutentification().Email;
+                    var reservations = ReservationRepository.UserReservation(user);
+                    string strHotel = "Hotel";
+                    Hotels hotel = (Hotels)selectedItem;
+                    bool IsReservated = false;
 
-                        for (int i = 0; i < reservations.Count; i++)
+                    for (int i = 0; i < reservations.Count; i++)
+                    {
+                        if (reservations[i].TourOrHotelId == hotel.Id && reservations[i].TourOrHotel == strHotel)
                         {
-                            if (reservations[i].TourOrHotelId == hotel.Id && reservations[i].TourOrHotel == strHotel)
-                            {
-                                IsReservated = true;
-                            }
+                            IsReservated = true;
                         }
-                        if (IsReservated)
-                        {
-                            MessageBox.Show("Вы уже забронировали этот отель");
-                        }
-                        else
-                        {
-                            ReservationRepository.AddReservarion(new Reservation { UserEmail = user, TourOrHotelId = hotel.Id, TourOrHotel = strHotel, IsConfirm = false });
-                            MessageBox.Show("Отель забронирован!");
-                        }
+                    }
+                    if (IsReservated)
+                    {
+                        MessageBox.Show("Вы уже забронировали этот отель");
+                    }
+                    else
+                    {
+                        ReservationRepository.AddReservarion(new Reservation { UserEmail = user, TourOrHotelId = hotel.Id, TourOrHotel = strHotel, IsConfirm = false });
+                        MessageBox.Show("Отель забронирован!");
                     }
                 }
             }
@@ -174,14 +175,10 @@ namespace Travel_agency
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            using (var context = new AppDbContext())
-            {
-                IUserRepository userRepository = new UserRepository(context);
-
-                User user = userRepository.UserAutentification();
-                user.isLogin = false;
-                userRepository.UpdateUser(user);
-            }
+            IUserRepository UserRepository = new UserRepository(new AppDbContext());
+            User user = UserRepository.UserAutentification();
+            user.isLogin = false;
+            UserRepository.UpdateUser(user);
         }
     }
 }

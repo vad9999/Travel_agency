@@ -37,11 +37,6 @@ namespace Travel_agency
             }
         }
 
-        private void ExiteButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         private void BlockingTrueButton_Click(object sender, RoutedEventArgs e)
         {
             if (UserListView.SelectedItem != null)

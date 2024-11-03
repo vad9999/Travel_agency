@@ -37,7 +37,7 @@ namespace Travel_agency
                 EditCountryBox.Text = TourToEdit.Country;
                 DiscriptionEditBox.Text = TourToEdit.Description;
                 PriceEditBox.Text = TourToEdit.Price.ToString();
-                imagePath = TourToEdit.PathImage;
+                //imagePath = TourToEdit.PathImage;
             }
             else
             {
@@ -47,12 +47,15 @@ namespace Travel_agency
                 EditCountryBox.Text = HotelToEdit.Country;
                 DiscriptionEditBox.Text = HotelToEdit.Description;
                 PriceEditBox.Text = HotelToEdit.Price.ToString();
-                imagePath = HotelToEdit.PathImage;
+                //imagePath = HotelToEdit.PathImage;
             }   
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            ITourRepository TourRepository = new TourRepository(new AppDbContext());
+            IHotelRepository HotelRepository = new HotelRepository(new AppDbContext());
+
             string Name = EditNameBox.Text;
             string Description = DiscriptionEditBox.Text;
             string Country = EditCountryBox.Text;
@@ -68,24 +71,20 @@ namespace Travel_agency
                 return;
             }
 
-            // Validate product count
             if (!decimal.TryParse(Price, out decimal price))
             {
                 MessageBox.Show("Product count must be a valid number.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
             if (IsTour)
             {
                 TourToEdit.Name = Name;
                 TourToEdit.Description = Description;
                 TourToEdit.Country = Country;
                 TourToEdit.Price = decimal.Parse(Price);
-                TourToEdit.PathImage = imagePath;
-                using (var context = new AppDbContext())
-                {
-                    ITourRepository TourRepository = new TourRepository(context);
-                    TourRepository.UpdateTour(TourToEdit);
-                }
+                //TourToEdit.PathImage = imagePath;
+                TourRepository.UpdateTour(TourToEdit);
                 ItemAdded?.Invoke(this, EventArgs.Empty);
                 DialogResult = true;
             }
@@ -95,12 +94,8 @@ namespace Travel_agency
                 HotelToEdit.Description = Description;
                 HotelToEdit.Country = Country;
                 HotelToEdit.Price = decimal.Parse(Price);
-                HotelToEdit.PathImage = imagePath;
-                using (var context = new AppDbContext())
-                {
-                    IHotelRepository HotelRepository = new HotelRepository(context);
-                    HotelRepository.UpdateHotel(HotelToEdit);
-                }
+                //HotelToEdit.PathImage = imagePath;
+                HotelRepository.UpdateHotel(HotelToEdit);
                 ItemAdded?.Invoke(this, EventArgs.Empty);
                 DialogResult = true;
             }

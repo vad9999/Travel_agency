@@ -27,25 +27,19 @@ namespace Travel_agency
 
         private void LoadData()
         {
-            using(var context = new AppDbContext())
-            {
-                IReservationRepository reservationRepository = new ReservationRepository(context);
-                List<Reservation> reservations = reservationRepository.GetAllReservarions();
-                ReservationsListView.ItemsSource = reservations;
-            }
+            IReservationRepository reservationRepository = new ReservationRepository(new AppDbContext());
+            List<Reservation> reservations = reservationRepository.GetAllReservarions();
+            ReservationsListView.ItemsSource = reservations;
         }
 
         private void ReservationTrueButton_Click(object sender, RoutedEventArgs e)
         {
+            IReservationRepository reservationRepository = new ReservationRepository(new AppDbContext());
             Reservation reservation = (Reservation)ReservationsListView.SelectedItem;
             if (reservation != null)
             {
-                using(var context = new AppDbContext())
-                {
-                    IReservationRepository reservationRepository = new ReservationRepository(context);
-                    reservation.IsConfirm = true;
-                    reservationRepository.UpdateReservation(reservation);
-                }
+                reservation.IsConfirm = true;
+                reservationRepository.UpdateReservation(reservation);
             }
             LoadData();
         }
